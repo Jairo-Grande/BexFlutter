@@ -80,16 +80,19 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
         userDataList = userData;
         //FUNCION PARA GUARDAR LA DATA EN EL LOCAL STORAGE...
         DataNetWork.saveData(userDataList);
+        loadingData = false;
       }
     } catch (error) {
+      loadingData = false;
       errorAlertDialog(
           buttonText: "Entiendo.",
           context: event.context,
           error: error.toString(),
           iconData: Icons.error_outline);
-      userDataList = await DataNetWork.readData();
     }
-    loadingData = false;
+
+    userDataList = await DataNetWork.readData();
+
     emit(state.copyWith(userData: userDataList, loadingData: loadingData));
   }
 

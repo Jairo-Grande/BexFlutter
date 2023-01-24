@@ -1,6 +1,9 @@
 # bex_app_flutter
 
-A new Flutter project.
+Se necesita una aplicación que consuma los servicios json placeholder a través de una api y sea
+capaz de guardar los datos a manera local, para efectos de uso sin conexión a internet, es decir
+la aplicación debe hacer un CRUD simple con datos obtenidos a través de la api de json
+placeholder con o sin internet.
 
 ## Getting Started
 

@@ -13,3 +13,12 @@ class RequestRegisters extends CrudEvent {
 class UpdateControllers extends CrudEvent {
   const UpdateControllers();
 }
+
+class AddRegisterToList extends CrudEvent {
+  const AddRegisterToList();
+}
+
+class DeleteRegisterFromList extends CrudEvent {
+  UserData userData;
+  DeleteRegisterFromList({required this.userData});
+}

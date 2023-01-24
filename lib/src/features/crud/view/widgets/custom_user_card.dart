@@ -1,9 +1,11 @@
 import 'package:bex_app_flutter/src/core/colors/app_colors.dart';
 import 'package:bex_app_flutter/src/core/global/constants.dart';
+import 'package:bex_app_flutter/src/features/crud/bloc/crud_bloc.dart';
 import 'package:bex_app_flutter/src/models/user_data_model.dart';
 
 import 'package:bex_app_flutter/src/shared/helpers/screens.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomUserCard extends StatelessWidget {
   final UserData userData;
@@ -12,6 +14,7 @@ class CustomUserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    CrudBloc crudBloc = BlocProvider.of<CrudBloc>(context);
 
     return Card(
         elevation: 5,
@@ -38,7 +41,10 @@ class CustomUserCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
-                            onPressed: (() {}),
+                            onPressed: (() {
+                              crudBloc.add(
+                                  DeleteRegisterFromList(userData: userData));
+                            }),
                             icon: const Icon(
                               Icons.delete_outline,
                               color: ColorLight.error,

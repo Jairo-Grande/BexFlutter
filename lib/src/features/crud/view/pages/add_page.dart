@@ -49,6 +49,7 @@ class _AddPageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
+    CrudBloc crudBloc = BlocProvider.of<CrudBloc>(context);
     return Scaffold(
       appBar: AppBar(),
       body: BlocBuilder<CrudBloc, CrudState>(
@@ -147,6 +148,8 @@ class _AddPageState extends State<AddPage> {
                             Expanded(
                               child: CustomElevatedButton(
                                 onTap: () {
+                                  crudBloc.add(const AddRegisterToList());
+
                                   setState(() => isLoading = true);
                                   Future.delayed(const Duration(seconds: 2),
                                       () {

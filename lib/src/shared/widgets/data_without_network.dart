@@ -16,7 +16,11 @@ class DataNetWork {
 
   static Future<List<UserData>> readData() async {
     String? jsonData = _prefs.getString('userData');
-    List<UserData> userData = userDataFromJson(jsonData!);
-    return userData;
+    if (jsonData != null) {
+      List<UserData> userData = userDataFromJson(jsonData);
+      return userData;
+    } else {
+      return [];
+    }
   }
 }

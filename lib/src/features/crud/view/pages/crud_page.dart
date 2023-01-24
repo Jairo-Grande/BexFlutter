@@ -19,7 +19,6 @@ class _CrudPageState extends State<CrudPage> {
   void initState() {
     crudBloc = BlocProvider.of<CrudBloc>(context);
     crudBloc.add(RequestRegisters(context: context));
-
     super.initState();
   }
 
@@ -34,11 +33,9 @@ class _CrudPageState extends State<CrudPage> {
               child: SizedBox(
                 height: 80,
                 width: 80,
-                child: Expanded(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 5,
-                    color: ColorLight.primary,
-                  ),
+                child: CircularProgressIndicator(
+                  strokeWidth: 5,
+                  color: ColorLight.primary,
                 ),
               ),
             );

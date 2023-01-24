@@ -14,7 +14,7 @@ class CustomUserCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Card(
-        elevation: 4,
+        elevation: 5,
         child: SizedBox(
           height: Screens.heigth(context) * 0.2,
           child: Padding(
@@ -26,7 +26,9 @@ class CustomUserCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(userData.name, style: theme.textTheme.bodyText1),
+                    Expanded(
+                        child: Text(userData.name,
+                            style: theme.textTheme.bodyText1)),
                     Row(
                       children: [
                         IconButton(

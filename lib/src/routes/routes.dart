@@ -4,5 +4,5 @@ import 'package:flutter/material.dart';
 
 final Map<String, Widget Function(BuildContext)> appRoutes = {
   'home': (_) => const CrudPage(),
-  'add': (_) => AddPage()
+  'add': (_) => const AddPage()
 };

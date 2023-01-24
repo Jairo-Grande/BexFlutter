@@ -1,12 +1,15 @@
 part of 'crud_bloc.dart';
 
-abstract class CrudEvent extends Equatable {
+abstract class CrudEvent {
   const CrudEvent();
 
-  @override
   List<Object> get props => [];
 }
 
 class RequestRegisters extends CrudEvent {
   const RequestRegisters();
+}
+
+class UpdateControllers extends CrudEvent {
+  const UpdateControllers();
 }

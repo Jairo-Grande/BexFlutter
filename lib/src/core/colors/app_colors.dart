@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColorLight {
   static const Color primary = Color(0xFFED5A37);
   static const Color secondary = Color(0xFFB9B9B9);
-  static const Color background = Color(0xFF9B9B9B);
+  static const Color background = Color.fromARGB(255, 228, 220, 220);
   static const Color card = Color(0xFFFFFFFF);
   static const Color fontTitle = Color(0xFF202020);
   static const Color fontSubtitle = Color(0xFF737373);

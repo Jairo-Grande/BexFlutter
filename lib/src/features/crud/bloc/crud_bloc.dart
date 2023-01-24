@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:bex_app_flutter/src/domain/repository/repository_http.dart';
 import 'package:bex_app_flutter/src/models/user_data_model.dart';
+import 'package:bex_app_flutter/src/shared/helpers/alerts/error_alert_dialog.dart';
+import 'package:bex_app_flutter/src/shared/widgets/data_without_network.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -9,6 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'crud_event.dart';
 part 'crud_state.dart';
+
+bool loadingData = true;
 
 bool isEditing = false;
 
@@ -40,6 +44,9 @@ UserData newUserData = UserData(
 
 UserData? userDataAux;
 
+String buttonLabel = "Editar";
+String auxiliarButtonLabel = "Editando";
+
 class CrudBloc extends Bloc<CrudEvent, CrudState> {
   CrudBloc()
       : super(CrudState(
@@ -50,7 +57,10 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
             emailController: emailController,
             companyNameController: companyNameController,
             phoneController: phoneController,
-            websiteController: websiteController)) {
+            websiteController: websiteController,
+            buttonLabel: buttonLabel,
+            auxiliarButtonLabel: auxiliarButtonLabel,
+            loadingData: loadingData)) {
     on<RequestRegisters>(_requestRegisters);
     on<UpdateControllers>(_updateControllers);
     on<AddRegisterToList>(_addRegisterToList);
@@ -63,19 +73,32 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
   void _requestRegisters(
       RequestRegisters event, Emitter<CrudState> emit) async {
     http.Response response;
-    response = await Request().getDataUser();
-    if (response.statusCode == HttpStatus.ok) {
-      final List<UserData> userData = userDataFromJson(response.body);
-      userDataList = userData;
-      emit(state.copyWith(userData: userData));
-    } else {}
+    try {
+      response = await Request().getDataUser();
+      if (response.statusCode == HttpStatus.ok) {
+        final List<UserData> userData = userDataFromJson(response.body);
+        userDataList = userData;
+        //FUNCION PARA GUARDAR LA DATA EN EL LOCAL STORAGE...
+        DataNetWork.saveData(userDataList);
+      }
+    } catch (error) {
+      errorAlertDialog(
+          buttonText: "Entiendo.",
+          context: event.context,
+          error: error.toString(),
+          iconData: Icons.error_outline);
+      userDataList = await DataNetWork.readData();
+    }
+    loadingData = false;
+    emit(state.copyWith(userData: userDataList, loadingData: loadingData));
   }
 
   void _updateControllers(UpdateControllers event, Emitter<CrudState> emit) {
     emit(state.copyWith());
   }
 
-  void _addRegisterToList(AddRegisterToList event, Emitter<CrudState> emit) {
+  void _addRegisterToList(
+      AddRegisterToList event, Emitter<CrudState> emit) async {
     UserData newUserDataAdd = UserData(
         id: 0,
         name: state.nameController.text,
@@ -94,8 +117,15 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
             catchPhrase: "catchPhrase",
             name: state.companyNameController.text));
 
+    buttonLabel = "Agregar";
+    auxiliarButtonLabel = "Agregando";
+
     userDataList.add(newUserDataAdd);
-    emit(state.copyWith(userData: userDataList));
+    DataNetWork.saveData(userDataList);
+    emit(state.copyWith(
+        userData: userDataList,
+        buttonLabel: buttonLabel,
+        auxiliarButtonLabel: auxiliarButtonLabel));
   }
 
   void _editRegister(EditRegisterFromList event, Emitter<CrudState> emit) {
@@ -105,19 +135,27 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
     phoneController.text = event.userData.phone;
     websiteController.text = event.userData.website;
     companyNameController.text = event.userData.company.name;
+    buttonLabel = "Editar";
+    auxiliarButtonLabel = "Editando";
+
     emit(state.copyWith(
         nameController: nameController,
         emailController: emailController,
         phoneController: phoneController,
         websiteController: websiteController,
         companyNameController: companyNameController,
-        isEditing: true));
+        isEditing: true,
+        buttonLabel: buttonLabel,
+        auxiliarButtonLabel: auxiliarButtonLabel));
   }
 
   void _deleteRegisterFromList(
       DeleteRegisterFromList event, Emitter<CrudState> emit) {
     userDataList.remove(event.userData);
-    emit(state.copyWith(userData: userDataList));
+    DataNetWork.saveData(userDataList);
+    emit(state.copyWith(
+      userData: userDataList,
+    ));
   }
 
   void _editRegisterEvent(EditRegisterEvent event, Emitter<CrudState> emit) {
@@ -142,7 +180,10 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
             name: state.companyNameController.text));
 
     userDataList.add(newUserDataEdit);
-    emit(state.copyWith(userData: userDataList));
+    DataNetWork.saveData(userDataList);
+    emit(state.copyWith(
+      userData: userDataList,
+    ));
   }
 
   void _resetControllers(ResetControllers event, Emitter<CrudState> emit) {
@@ -150,11 +191,17 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
     emailController.text = "";
     phoneController.text = "";
     websiteController.text = "";
-    state.copyWith(
+    companyNameController.text = "";
+    buttonLabel = "Agregar";
+    auxiliarButtonLabel = "Agregando";
+
+    emit(state.copyWith(
         nameController: nameController,
         emailController: emailController,
         phoneController: phoneController,
         websiteController: websiteController,
-        companyNameController: companyNameController);
+        companyNameController: companyNameController,
+        buttonLabel: buttonLabel,
+        auxiliarButtonLabel: auxiliarButtonLabel));
   }
 }

@@ -29,7 +29,7 @@ errorAlertDialog(
                           color: theme.errorColor, size: 50),
                       const Text(
                         textAlign: TextAlign.center,
-                        "Oh no!\n something went wrong.",
+                        "Oh no!\n Algo salió mal.",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(
@@ -53,7 +53,7 @@ errorAlertDialog(
                             ),
                             child: Center(
                               child: Text(
-                                "Try again",
+                                buttonText,
                                 style: TextStyle(
                                   color: theme.errorColor,
                                   fontSize: 14,

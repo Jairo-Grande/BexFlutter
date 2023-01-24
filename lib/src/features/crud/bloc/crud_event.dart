@@ -7,7 +7,8 @@ abstract class CrudEvent {
 }
 
 class RequestRegisters extends CrudEvent {
-  const RequestRegisters();
+  final BuildContext context;
+  const RequestRegisters({required this.context});
 }
 
 class UpdateControllers extends CrudEvent {

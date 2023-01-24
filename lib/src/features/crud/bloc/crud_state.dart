@@ -1,6 +1,8 @@
 part of 'crud_bloc.dart';
 
 class CrudState {
+  final bool loadingData;
+
   final bool isEditing;
 
   final List<UserData> userData;
@@ -13,36 +15,47 @@ class CrudState {
   final TextEditingController websiteController;
   final TextEditingController companyNameController;
 
-  CrudState(
-      {required this.isEditing,
-      required this.userData,
-      required this.newUserData,
-      required this.nameController,
-      required this.emailController,
-      required this.phoneController,
-      required this.websiteController,
-      required this.companyNameController});
+  final String buttonLabel;
+  final String auxiliarButtonLabel;
 
-  CrudState copyWith({
-    bool? isEditing,
-    List<UserData>? userData,
-    UserData? newUserData,
-    TextEditingController? nameController,
-    TextEditingController? emailController,
-    TextEditingController? phoneController,
-    TextEditingController? websiteController,
-    TextEditingController? companyNameController,
-  }) {
+  CrudState({
+    required this.loadingData,
+    required this.isEditing,
+    required this.userData,
+    required this.newUserData,
+    required this.nameController,
+    required this.emailController,
+    required this.phoneController,
+    required this.websiteController,
+    required this.companyNameController,
+    required this.buttonLabel,
+    required this.auxiliarButtonLabel,
+  });
+
+  CrudState copyWith(
+      {bool? loadingData,
+      bool? isEditing,
+      List<UserData>? userData,
+      UserData? newUserData,
+      TextEditingController? nameController,
+      TextEditingController? emailController,
+      TextEditingController? phoneController,
+      TextEditingController? websiteController,
+      TextEditingController? companyNameController,
+      String? buttonLabel,
+      String? auxiliarButtonLabel}) {
     return CrudState(
-      isEditing: isEditing ?? this.isEditing,
-      userData: userData ?? this.userData,
-      newUserData: newUserData ?? this.newUserData,
-      nameController: nameController ?? this.nameController,
-      emailController: emailController ?? this.emailController,
-      phoneController: phoneController ?? this.phoneController,
-      websiteController: websiteController ?? this.websiteController,
-      companyNameController:
-          companyNameController ?? this.companyNameController,
-    );
+        loadingData: loadingData ?? this.loadingData,
+        isEditing: isEditing ?? this.isEditing,
+        userData: userData ?? this.userData,
+        newUserData: newUserData ?? this.newUserData,
+        nameController: nameController ?? this.nameController,
+        emailController: emailController ?? this.emailController,
+        phoneController: phoneController ?? this.phoneController,
+        websiteController: websiteController ?? this.websiteController,
+        companyNameController:
+            companyNameController ?? this.companyNameController,
+        buttonLabel: buttonLabel ?? this.buttonLabel,
+        auxiliarButtonLabel: auxiliarButtonLabel ?? this.auxiliarButtonLabel);
   }
 }

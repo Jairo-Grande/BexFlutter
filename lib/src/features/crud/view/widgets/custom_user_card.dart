@@ -9,7 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomUserCard extends StatelessWidget {
   final UserData userData;
-  const CustomUserCard({super.key, required this.userData});
+  final bool? onAddPage;
+  const CustomUserCard({super.key, required this.userData, this.onAddPage});
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +37,11 @@ class CustomUserCard extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: (() {
-                            crudBloc
-                                .add(EditRegisterFromList(userData: userData));
-                            Navigator.pushNamed(context, "add");
+                            if (onAddPage == null) {
+                              crudBloc.add(
+                                  EditRegisterFromList(userData: userData));
+                              Navigator.pushNamed(context, "add");
+                            }
                           }),
                           icon: const Icon(Icons.edit),
                         ),
@@ -46,8 +49,10 @@ class CustomUserCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
                             onPressed: (() {
-                              crudBloc.add(
-                                  DeleteRegisterFromList(userData: userData));
+                              if (onAddPage == null) {
+                                crudBloc.add(
+                                    DeleteRegisterFromList(userData: userData));
+                              }
                             }),
                             icon: const Icon(
                               Icons.delete_outline,

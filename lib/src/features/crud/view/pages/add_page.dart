@@ -33,7 +33,6 @@ class _AddPageState extends State<AddPage> {
     companyFocus = FocusNode();
     phoneFocus = FocusNode();
     webSiteFocus = FocusNode();
-
     super.initState();
   }
 
@@ -56,24 +55,28 @@ class _AddPageState extends State<AddPage> {
         builder: (context, state) {
           return Column(
             children: [
-              CustomUserCard(
-                userData: UserData(
-                    id: 0,
-                    name: state.nameController.text,
-                    username: "User Name",
-                    email: emailController.text,
-                    address: Address(
-                        street: "street",
-                        suite: "suite",
-                        city: "city",
-                        zipcode: "zipcode",
-                        geo: Geo(lat: "lat", lng: "long")),
-                    phone: state.phoneController.text,
-                    website: state.websiteController.text,
-                    company: Company(
-                        bs: "bs",
-                        catchPhrase: "catchPhrase",
-                        name: state.companyNameController.text)),
+              Hero(
+                tag: state.nameController.text,
+                child: CustomUserCard(
+                  onAddPage: true,
+                  userData: UserData(
+                      id: 0,
+                      name: state.nameController.text,
+                      username: "User Name",
+                      email: emailController.text,
+                      address: Address(
+                          street: "street",
+                          suite: "suite",
+                          city: "city",
+                          zipcode: "zipcode",
+                          geo: Geo(lat: "lat", lng: "long")),
+                      phone: state.phoneController.text,
+                      website: state.websiteController.text,
+                      company: Company(
+                          bs: "bs",
+                          catchPhrase: "catchPhrase",
+                          name: state.companyNameController.text)),
+                ),
               ),
               const SizedBox(
                 height: Const.space25,
@@ -146,33 +149,22 @@ class _AddPageState extends State<AddPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Expanded(
-                              child: CustomElevatedButton(
-                                onTap: () {
-                                  (state.isEditing)
-                                      ? crudBloc.add(EditRegisterEvent())
-                                      : crudBloc.add(AddRegisterToList());
+                                child: CustomElevatedButton(
+                              onTap: () {
+                                (state.isEditing)
+                                    ? crudBloc.add(EditRegisterEvent())
+                                    : crudBloc.add(AddRegisterToList());
 
-                                  setState(() => isLoading = true);
-                                  Future.delayed(const Duration(seconds: 2),
-                                      () {
-                                    setState(() => isLoading = false);
-                                    Navigator.pop(context);
-                                  });
-                                },
-                                isLoading: isLoading,
-                                labelLoading: "Agregando",
-                                label: "Agregar registro",
-                              ),
-                            ),
-                            const SizedBox(
-                              width: Const.space15,
-                            ),
-                            Expanded(
-                              child: CustomElevatedButton(
-                                onTap: () {},
-                                label: "Limpiar Registro",
-                              ),
-                            )
+                                setState(() => isLoading = true);
+                                Future.delayed(const Duration(seconds: 2), () {
+                                  setState(() => isLoading = false);
+                                  Navigator.pop(context);
+                                });
+                              },
+                              isLoading: isLoading,
+                              labelLoading: state.auxiliarButtonLabel,
+                              label: state.buttonLabel,
+                            )),
                           ],
                         ),
                       )

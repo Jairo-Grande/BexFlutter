@@ -37,15 +37,14 @@ class _CustomInputState extends State<CustomInput> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: Const.space12),
           child: Text(
             widget.label,
             style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
           ),
         ),
         Container(
-          margin:
-              const EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 25),
+          margin: const EdgeInsets.all(Const.space12),
           child: Row(
             children: [
               Expanded(
@@ -96,22 +95,6 @@ class _CustomInputState extends State<CustomInput> {
 
   void requestFocus(BuildContext context, FocusNode focusNode) {
     FocusScope.of(context).requestFocus(focusNode);
-  }
-
-  showDataPicker() {
-    return showDatePicker(
-            locale: const Locale('es', "ES"),
-            context: context,
-            initialDate: DateTime(2000),
-            firstDate: DateTime(1920),
-            lastDate: DateTime.now())
-        .then((value) {
-      if (value != null) {
-        widget.textController.text =
-            "${value.day} / ${value.month} / ${value.year}";
-      }
-      return;
-    });
   }
 }
 

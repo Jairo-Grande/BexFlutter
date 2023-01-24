@@ -16,8 +16,14 @@ ThemeData themeLight(BuildContext context) {
     primaryIconTheme: const IconThemeData(
       color: ColorLight.card,
     ),
+    inputDecorationTheme: const InputDecorationTheme(
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: ColorLight.primary),
+      ),
+    ),
     primaryColor: ColorLight.primary,
-    textSelectionTheme: const TextSelectionThemeData(),
+    textSelectionTheme:
+        const TextSelectionThemeData(cursorColor: ColorLight.primary),
     scaffoldBackgroundColor: ColorLight.background,
     appBarTheme: const AppBarTheme(color: ColorLight.primary),
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
@@ -67,7 +73,7 @@ ThemeData themeLight(BuildContext context) {
         fontWeight: FontWeight.normal,
       ),
       button: GoogleFonts.poppins(
-        color: ColorLight.fontgeneralColor,
+        color: ColorLight.card,
         fontSize: 14,
         fontWeight: FontWeight.normal,
       ),

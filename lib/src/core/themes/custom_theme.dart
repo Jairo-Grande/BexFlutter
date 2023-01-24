@@ -6,71 +6,68 @@ import 'package:google_fonts/google_fonts.dart';
 ThemeData themeLight(BuildContext context) {
   return ThemeData(
     brightness: Brightness.light,
-    backgroundColor: ColorLight.background,
+    backgroundColor: ColorLight.card,
     cardColor: ColorLight.card,
     disabledColor: ColorLight.card,
     errorColor: ColorLight.error,
     hintColor: ColorLight.card,
     indicatorColor: ColorLight.primary,
     primaryColorLight: ColorLight.primary,
-//    primaryColorDark: ColorLight.gold,
     primaryIconTheme: const IconThemeData(
       color: ColorLight.card,
     ),
     primaryColor: ColorLight.primary,
-    textSelectionTheme: const TextSelectionThemeData(
-        // cursorColor: ColorLight.gold,
-        ),
+    textSelectionTheme: const TextSelectionThemeData(),
     scaffoldBackgroundColor: ColorLight.background,
-
+    appBarTheme: const AppBarTheme(color: ColorLight.primary),
     textTheme: GoogleFonts.poppinsTextTheme().copyWith(
       headline1: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.fontgeneralColor,
         fontSize: 20,
         fontWeight: FontWeight.w500,
       ),
       headline2: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.fontgeneralColor,
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),
       headline3: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.fontgeneralColor,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
       headline4: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.fontgeneralColor,
         fontSize: 14,
         fontWeight: FontWeight.w500,
       ),
       headline5: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.fontgeneralColor,
         fontSize: 12,
         fontWeight: FontWeight.w500,
       ),
       bodyText1: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.primary,
         fontSize: 16,
         fontWeight: FontWeight.normal,
       ),
       bodyText2: GoogleFonts.poppins(
-        color: ColorLight.card,
-        fontSize: 14,
+        color: ColorLight.fontgeneralColor,
+        fontSize: 12,
         fontWeight: FontWeight.normal,
       ),
       subtitle1: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.fontgeneralColor,
         fontSize: 14,
         fontWeight: FontWeight.normal,
       ),
       subtitle2: GoogleFonts.poppins(
-        color: ColorLight.card,
+        color: ColorLight.primary,
         fontSize: 12,
         fontWeight: FontWeight.normal,
       ),
       button: GoogleFonts.poppins(
-        color: Colors.white,
+        color: ColorLight.fontgeneralColor,
         fontSize: 14,
         fontWeight: FontWeight.normal,
       ),

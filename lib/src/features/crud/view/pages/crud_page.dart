@@ -1,6 +1,5 @@
 import 'package:bex_app_flutter/src/core/colors/app_colors.dart';
 import 'package:bex_app_flutter/src/features/crud/view/widgets/custom_user_card.dart';
-import 'package:bex_app_flutter/src/shared/helpers/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

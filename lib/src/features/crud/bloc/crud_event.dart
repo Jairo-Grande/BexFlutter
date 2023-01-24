@@ -15,10 +15,23 @@ class UpdateControllers extends CrudEvent {
 }
 
 class AddRegisterToList extends CrudEvent {
-  const AddRegisterToList();
+  AddRegisterToList();
 }
 
 class DeleteRegisterFromList extends CrudEvent {
   UserData userData;
   DeleteRegisterFromList({required this.userData});
+}
+
+class EditRegisterFromList extends CrudEvent {
+  UserData userData;
+  EditRegisterFromList({required this.userData});
+}
+
+class EditRegisterEvent extends CrudEvent {
+  EditRegisterEvent();
+}
+
+class ResetControllers extends CrudEvent {
+  ResetControllers();
 }

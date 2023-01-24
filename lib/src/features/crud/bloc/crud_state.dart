@@ -1,7 +1,11 @@
 part of 'crud_bloc.dart';
 
 class CrudState {
+  final bool isEditing;
+
   final List<UserData> userData;
+
+  final UserData newUserData;
 
   final TextEditingController nameController;
   final TextEditingController emailController;
@@ -10,7 +14,9 @@ class CrudState {
   final TextEditingController companyNameController;
 
   CrudState(
-      {required this.userData,
+      {required this.isEditing,
+      required this.userData,
+      required this.newUserData,
       required this.nameController,
       required this.emailController,
       required this.phoneController,
@@ -18,7 +24,9 @@ class CrudState {
       required this.companyNameController});
 
   CrudState copyWith({
+    bool? isEditing,
     List<UserData>? userData,
+    UserData? newUserData,
     TextEditingController? nameController,
     TextEditingController? emailController,
     TextEditingController? phoneController,
@@ -26,7 +34,9 @@ class CrudState {
     TextEditingController? companyNameController,
   }) {
     return CrudState(
+      isEditing: isEditing ?? this.isEditing,
       userData: userData ?? this.userData,
+      newUserData: newUserData ?? this.newUserData,
       nameController: nameController ?? this.nameController,
       emailController: emailController ?? this.emailController,
       phoneController: phoneController ?? this.phoneController,

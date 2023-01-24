@@ -38,6 +38,7 @@ class _CrudPageState extends State<CrudPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          crudBloc.add(ResetControllers());
           Navigator.pushNamed(context, "add");
         },
         backgroundColor: ColorLight.primary,

@@ -148,12 +148,15 @@ class _AddPageState extends State<AddPage> {
                             Expanded(
                               child: CustomElevatedButton(
                                 onTap: () {
-                                  crudBloc.add(const AddRegisterToList());
+                                  (state.isEditing)
+                                      ? crudBloc.add(EditRegisterEvent())
+                                      : crudBloc.add(AddRegisterToList());
 
                                   setState(() => isLoading = true);
                                   Future.delayed(const Duration(seconds: 2),
                                       () {
                                     setState(() => isLoading = false);
+                                    Navigator.pop(context);
                                   });
                                 },
                                 isLoading: isLoading,

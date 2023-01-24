@@ -35,7 +35,11 @@ class CustomUserCard extends StatelessWidget {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: (() {}),
+                          onPressed: (() {
+                            crudBloc
+                                .add(EditRegisterFromList(userData: userData));
+                            Navigator.pushNamed(context, "add");
+                          }),
                           icon: const Icon(Icons.edit),
                         ),
                         Padding(
